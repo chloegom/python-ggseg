@@ -169,8 +169,9 @@ def plot_dk(data, cmap='Spectral', background='k', edgecolor='w', ylabel='',
 
     # A colorbar is added
     _add_colorbar_(ax, cmap, norm, edgecolor, fontsize*0.75, ylabel)
-
-    plt.show()
+    
+    fig = ax.get_figure()
+    return fig
 
 
 def plot_jhu(data, cmap='Spectral', background='k', edgecolor='w', ylabel='',
@@ -279,7 +280,8 @@ def plot_aseg(data, cmap='Spectral', background='k', edgecolor='w', ylabel='',
         if k in reg:
             known_values.append(v)
 
-    whole_reg = ['Coronal', 'Sagittal']
+    # whole_reg = ['Coronal', 'Sagittal']
+    whole_reg = ['Coronal']
     files = [open(op.join(wd, e)).read() for e in whole_reg]
 
     # A figure is created by the joint dimensions of the whole-brain outlines
@@ -296,11 +298,13 @@ def plot_aseg(data, cmap='Spectral', background='k', edgecolor='w', ylabel='',
     _render_data_(data, wd, cmap, norm, ax, edgecolor)
 
     # The following regions are ignored/displayed in gray
-    NA = ['Cerebellum-Cortex', 'Cerebellum-White-Matter', 'Brain-Stem']
+    # NA = ['Cerebellum-Cortex', 'Cerebellum-White-Matter', 'Brain-Stem']
+    NA = ['Brain-Stem']
     files = [open(op.join(wd, e)).read() for e in NA]
     _render_regions_(files, ax, '#111111', edgecolor)
 
     # A colorbar is added
     _add_colorbar_(ax, cmap, norm, edgecolor, fontsize*0.75, ylabel)
 
-    plt.show()
+    fig = ax.get_figure()
+    return fig
